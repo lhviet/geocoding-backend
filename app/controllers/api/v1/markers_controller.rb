@@ -1,4 +1,4 @@
-class Api::MarkersController < ApplicationController
+class Api::V1::MarkersController < ApplicationController
   before_action :set_marker, only: [:show, :update, :destroy]
 
   # GET /markers
