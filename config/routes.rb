@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+
       resources :markers
-      get 'geocoding/query'
-      get 'geocoding/reverse'
+
+      namespace :geocoding do
+        get 'query'
+        get 'reverse'
+      end
+
     end
   end
 end

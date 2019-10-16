@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class Api::V1::MarkersControllerTest < ActionDispatch::IntegrationTest
+  new_marker = { title: 'dump title', lat: 123.123, lng:456.456 }
   setup do
     @marker = markers(:one)
   end
@@ -12,7 +13,7 @@ class Api::V1::MarkersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create marker" do
     assert_difference('Marker.count') do
-      post api_v1_markers_url, params: { marker: {  } }, as: :json
+      post api_v1_markers_url, params: new_marker, as: :json
     end
 
     assert_response 201
@@ -24,7 +25,7 @@ class Api::V1::MarkersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update marker" do
-    patch api_v1_marker_url(@marker), params: { marker: {  } }, as: :json
+    patch api_v1_marker_url(@marker), params: { marker: { lat: new_marker[:lat] } }, as: :json
     assert_response 200
   end
 
