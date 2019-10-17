@@ -1,0 +1,182 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/geocoding/query": {
+      "get": {
+        "summary": "Geocoding query",
+        "tags": [
+          "Geocoding"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "l",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "locations found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "string"
+                },
+                "lng": {
+                  "type": "float"
+                },
+                "desc": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "desc",
+                "lat",
+                "lng"
+              ]
+            }
+          },
+          "406": {
+            "description": "unsupported accept header"
+          }
+        }
+      }
+    },
+    "/markers": {
+      "post": {
+        "summary": "Creates a Marker",
+        "tags": [
+          "Markers"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "marker",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "string"
+                },
+                "lng": {
+                  "type": "float"
+                },
+                "desc": {
+                  "type": "string"
+                },
+                "info": {
+                  "type": "json"
+                }
+              },
+              "required": [
+                "title",
+                "lat",
+                "lng"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Marker created"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/markers/{id}": {
+      "get": {
+        "summary": "Retrieves a Marker",
+        "tags": [
+          "Markers"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "marker found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "lat": {
+                  "type": "string"
+                },
+                "lng": {
+                  "type": "float"
+                },
+                "desc": {
+                  "type": "string"
+                },
+                "info": {
+                  "type": "json"
+                },
+                "updated_at": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "lat",
+                "lng"
+              ]
+            }
+          },
+          "404": {
+            "description": "marker not found"
+          },
+          "406": {
+            "description": "unsupported accept header"
+          }
+        }
+      }
+    }
+  }
+}
